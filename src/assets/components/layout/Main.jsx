@@ -29,6 +29,10 @@ export default function Main() {
     setFormData(newFormData);
   }
 
+  function retrieveTags(tags) {
+    return tags;
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -38,10 +42,11 @@ export default function Main() {
       id: cardList.length + 1,
       image: "https://placehold.co/600x400",
       isPublic: formData.isPublic,
-      tags: [],
+      tags: retrieveTags(),
       title: formData.title,
       category: formData.category,
     };
+
     const newCardList = [...cardList, newCard];
 
     setCardList(newCardList);
@@ -115,7 +120,7 @@ export default function Main() {
             </div>
 
             <div className="col-12 mb-3">
-              <BadgeList badgeList={badgeList} />
+              <BadgeList badgeList={badgeList} retrieveTags={retrieveTags} />
             </div>
 
             <div>
@@ -128,12 +133,15 @@ export default function Main() {
                 onChange={handleFormChange}
                 autoComplete="off"
               />
-              <label className="btn btn-outline-light" htmlFor="publishInput">
+              <label
+                className="btn btn-outline-light fs-5"
+                htmlFor="publishInput"
+              >
                 Public
               </label>
             </div>
             <div>
-              <button className="btn btn-light">Create</button>
+              <button className="btn btn-light fs-5">Create</button>
             </div>
           </form>
         </div>

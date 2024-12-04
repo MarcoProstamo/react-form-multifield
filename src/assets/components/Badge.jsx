@@ -1,12 +1,14 @@
 import { useState } from "react";
 
-export default function Badge({ badge }) {
-  const [status, setStatus] = useState(false);
+export default function Badge({ badge, retrieveTags }) {
+  const [tags, setTags] = useState([]);
   function handleChange(e) {
-    console.log(e);
-
-    setStatus(e.target.checked);
+    const value = e.target.id;
+    if (!tags.includes(e.target.id)) setTags([...tags, value]);
+    // TODO: RESET CHECKED + BETTER RETRIEVE DATA
+    return retrieveTags(tags || []);
   }
+
   return (
     <>
       <input
