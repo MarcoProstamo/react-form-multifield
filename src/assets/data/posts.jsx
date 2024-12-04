@@ -8,6 +8,7 @@ export const posts = [
     status: "published",
     tags: ["JavaScript", "Programming", "Web Development"],
     title: "Understanding JavaScript Closures",
+    category: "Programming",
   },
   {
     author: "Jane Smith",
@@ -18,6 +19,7 @@ export const posts = [
     status: "draft",
     tags: ["HTML", "CSS", "Design"],
     title: "A Guide to Responsive Web Design",
+    category: "Web Design",
   },
   {
     author: "Chris Johnson",
@@ -28,6 +30,7 @@ export const posts = [
     status: "published",
     tags: ["CSS", "Grid", "Web Development"],
     title: "Exploring CSS Grid Layout",
+    category: "Frontend Development",
   },
   {
     author: "Emily Davis",
@@ -38,6 +41,7 @@ export const posts = [
     status: "draft",
     tags: ["Accessibility", "HTML", "Best Practices"],
     title: "The Importance of Web Accessibility",
+    category: "Accessibility",
   },
   {
     author: "Michael Brown",
@@ -48,5 +52,6 @@ export const posts = [
     status: "published",
     tags: ["React", "JavaScript", "Frontend"],
     title: "Introduction to React Hooks",
+    category: "React Development",
   },
 ];
