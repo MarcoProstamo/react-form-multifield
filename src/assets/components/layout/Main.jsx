@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardList from "../CardList";
 import { posts } from "../../data/posts";
 
@@ -14,6 +14,9 @@ const formInitialData = {
 export default function Main() {
   const [formData, setFormData] = useState(formInitialData);
   const [cardList, setCardList] = useState([...posts]);
+  useEffect(() => {
+    if (formData.isPublic) alert("Public Post!");
+  }, [formData.isPublic]);
 
   function handleFormChange(e) {
     const newFormData = {
@@ -113,7 +116,7 @@ export default function Main() {
                 type="checkbox"
                 className="btn-check"
                 id="publishInput"
-                value={formData.status}
+                value={formData.isPublic}
                 name="isPublic"
                 onChange={handleFormChange}
                 autoComplete="off"
