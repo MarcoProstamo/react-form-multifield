@@ -1,12 +1,11 @@
 import { useState } from "react";
 import CardList from "../CardList";
-import { posts as cardList } from "../../data/posts";
+import { posts } from "../../data/posts";
 
 const formInitialData = {
   author: "",
   content: "",
-  image: "",
-  status: false,
+  isPublic: false,
   tags: [],
   title: "",
   category: "",
@@ -14,6 +13,7 @@ const formInitialData = {
 
 export default function Main() {
   const [formData, setFormData] = useState(formInitialData);
+  const [cardList, setCardList] = useState([...posts]);
 
   function handleFormChange(e) {
     const newFormData = {
@@ -26,7 +26,25 @@ export default function Main() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    const newCard = {
+      author: formData.author,
+      content: formData.content,
+      id: cardList.length + 1,
+      image: "https://placehold.co/600x400",
+      isPublic: formData.isPublic,
+      tags: [],
+      title: formData.title,
+      category: formData.category,
+    };
+    const newCardList = [...cardList, newCard];
+
+    setCardList(newCardList);
+
+    // # Reset Form
     setFormData(formInitialData);
+    e.target.publishInput.checked = false;
+    e.target.category.value = "";
   }
 
   return (
@@ -34,7 +52,10 @@ export default function Main() {
       <section className="form-section border-1 border-bottom">
         <div className="container py-4">
           <h2 className="text-light text-center pb-4">Post Creation</h2>
-          <form className="d-flex gap-3 flex-wrap justify-content-between align-items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="d-flex gap-3 flex-wrap justify-content-between align-items-center"
+          >
             <div className="form-floating col">
               <input
                 type="text"
@@ -93,7 +114,7 @@ export default function Main() {
                 className="btn-check"
                 id="publishInput"
                 value={formData.status}
-                name="status"
+                name="isPublic"
                 onChange={handleFormChange}
                 autoComplete="off"
               />
@@ -102,9 +123,7 @@ export default function Main() {
               </label>
             </div>
             <div>
-              <button className="btn btn-light" onClick={handleSubmit}>
-                Create
-              </button>
+              <button className="btn btn-light">Create</button>
             </div>
           </form>
         </div>

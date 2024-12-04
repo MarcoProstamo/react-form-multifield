@@ -1,7 +1,7 @@
 export default function Card({ card }) {
   return (
     <>
-      <div className="card">
+      <div className="card p-0 m-2">
         <img
           src="https://placehold.co/600x400"
           className="card-img-top"
