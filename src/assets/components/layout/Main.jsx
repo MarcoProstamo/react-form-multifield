@@ -1,4 +1,31 @@
+import { useState } from "react";
+import { findDOMNode } from "react-dom";
+
+const formInitialData = {
+  author: "",
+  content: "",
+  image: "",
+  status: false,
+  tags: [],
+  title: "",
+  category: "",
+};
+
 export default function Main() {
+  const [formData, setFormData] = useState(formInitialData);
+
+  function handleFormChange(e) {
+    const newFormData = {
+      ...formData,
+      [e.target.name]:
+        e.target.type === "checkbox" ? e.target.checked : e.target.value,
+    };
+    setFormData(newFormData);
+    console.log(newFormData);
+  }
+
+  function handleSubmit() {}
+
   return (
     <main>
       <div className="container pt-4">
@@ -10,6 +37,9 @@ export default function Main() {
                 type="text"
                 className="form-control"
                 id="titleInput"
+                value={formData.title}
+                name="title"
+                onChange={handleFormChange}
                 placeholder="Title"
               />
               <label htmlFor="titleInput">Title</label>
@@ -19,13 +49,20 @@ export default function Main() {
                 type="text"
                 className="form-control"
                 id="authorInput"
+                value={formData.author}
+                name="author"
+                onChange={handleFormChange}
                 placeholder="Author"
               />
               <label htmlFor="authorInput">Author</label>
             </div>
             <div className="col">
-              <select name="categories" className="form-select">
-                <option selected>Select Category</option>
+              <select
+                name="categories"
+                className="form-select"
+                onChange={handleFormChange}
+              >
+                <option value="">Select Category</option>
                 <option value="Programming">Programming</option>
                 <option value="Web Design">Web Design</option>
                 <option value="Frontend Development">
@@ -40,6 +77,9 @@ export default function Main() {
                 type="text"
                 className="form-control"
                 id="contentInput"
+                value={formData.content}
+                name="content"
+                onChange={handleFormChange}
                 placeholder="Content"
               />
               <label htmlFor="contentInput">Content</label>
@@ -49,6 +89,9 @@ export default function Main() {
                 type="checkbox"
                 className="btn-check"
                 id="publishInput"
+                value={formData.status}
+                name="status"
+                onChange={handleFormChange}
                 autoComplete="off"
               />
               <label className="btn btn-outline-light" htmlFor="publishInput">
@@ -56,7 +99,9 @@ export default function Main() {
               </label>
             </div>
             <div>
-              <button className="btn btn-light">Create</button>
+              <button className="btn btn-light" onClick={handleSubmit}>
+                Create
+              </button>
             </div>
           </form>
         </section>
