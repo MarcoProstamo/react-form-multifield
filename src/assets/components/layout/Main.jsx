@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { findDOMNode } from "react-dom";
+import CardList from "../CardList";
+import { posts as cardList } from "../../data/posts";
 
 const formInitialData = {
   author: "",
@@ -21,16 +22,18 @@ export default function Main() {
         e.target.type === "checkbox" ? e.target.checked : e.target.value,
     };
     setFormData(newFormData);
-    console.log(newFormData);
   }
 
-  function handleSubmit() {}
+  function handleSubmit(e) {
+    e.preventDefault();
+    setFormData(formInitialData);
+  }
 
   return (
     <main>
-      <div className="container pt-4">
-        <h2 className="text-light text-center pb-4">Post Creation</h2>
-        <section className="form-section">
+      <section className="form-section border-1 border-bottom">
+        <div className="container py-4">
+          <h2 className="text-light text-center pb-4">Post Creation</h2>
           <form className="d-flex gap-3 flex-wrap justify-content-between align-items-center">
             <div className="form-floating col">
               <input
@@ -58,7 +61,7 @@ export default function Main() {
             </div>
             <div className="col">
               <select
-                name="categories"
+                name="category"
                 className="form-select"
                 onChange={handleFormChange}
               >
@@ -104,8 +107,15 @@ export default function Main() {
               </button>
             </div>
           </form>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container py-4">
+          <h2 className="text-light text-center pb-4">Post List</h2>
+          <CardList cardList={cardList} />
+        </div>
+      </section>
     </main>
   );
 }
