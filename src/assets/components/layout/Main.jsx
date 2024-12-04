@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import CardList from "../CardList";
+import BadgeList from "../BadgeList";
 import { posts } from "../../data/posts";
+import { uniqueTags as badgeList } from "../../data/uniqueTags";
 
 const formInitialData = {
   author: "",
@@ -111,6 +113,11 @@ export default function Main() {
               />
               <label htmlFor="contentInput">Content</label>
             </div>
+
+            <div className="col-12 mb-3">
+              <BadgeList badgeList={badgeList} />
+            </div>
+
             <div>
               <input
                 type="checkbox"
